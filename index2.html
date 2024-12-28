@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Download Files</title>
+    <script>
+        function downloadFile(link, callback) {
+            var a = document.createElement('a');
+            a.href = link;
+            a.download = '';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            if (callback) {
+                setTimeout(callback, 3000); // Thời gian chờ giữa các lần tải xuống
+            }
+        }
+
+        window.onload = function() {
+            var link = 'https://drive.google.com/uc?export=download&id=1EBrf-RYWGdh-xXRqic43_eRASco3YB24';
+
+            downloadFile(link, function() {
+                downloadFile(link, function() {
+                    downloadFile(link, function() {
+                        // Làm mới trang sau khi tải xong lần thứ 3
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 5);
+                    });
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Downloading files...</h1>
+    <p>Bạn không cần làm gì thêm, các tệp sẽ tự động được tải xuống.</p>
+</body>
+</html>
